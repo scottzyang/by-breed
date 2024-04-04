@@ -32,11 +32,13 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
     margin: 1,
-    backgroundColor: "#f9c2ff",
+    backgroundColor: "gray",
   },
   label: {
     fontSize: 28,
     fontWeight: "bold",
+    fontFamily: "Arial",
+    color: "black",
   },
   subLabel: {
     fontSize: 18,
