@@ -14,16 +14,22 @@ export default function Item(props) {
   // Calculate average rating by dividing total rating by the number of properties
   const averageRating = totalRating / keys.length;
 
+  // display ratings as ⭐️
+  const starRatings = (rating) => {
+  return '⭐️'.repeat(rating);
+};
+
+
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{`${index + 1}. ${breed}`}</Text>
       {keys.map((key) => (
         <View key={key} style={styles.propertiesContainer}>
           <Text style={styles.subLabel}>{key}:</Text>
-          <Text style={styles.propertyValue}>{data[key]}</Text>
+          <Text style={styles.propertyValue}>{starRatings(data[key])}</Text>
         </View>
       ))}
-      <Text style={styles.averageRating}>{`Average Rating: ${averageRating.toFixed(2)}`}</Text>
+      <Text style={styles.averageRating}>{`Average Rating: ${averageRating.toFixed(2)} ⭐️`}</Text>
     </View>
   );
 }
