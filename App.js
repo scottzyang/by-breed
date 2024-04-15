@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, FlatList, SafeAreaView, KeyboardAvoidingView, TextInput } from 'react-native';
+import { StyleSheet, Text, FlatList, SafeAreaView, KeyboardAvoidingView, TextInput, Button } from 'react-native';
 import { cats, dogs, petTypes } from './breeds';
 import Item from './Item';
 import { useState } from 'react';
 
 export default function App() {
   const [searchTerm, setSearchTerm] = useState(null)
+  const [currentAnimal, setCurrentAnimal] = useState("cats")
 
   const searchTermUpdate = (text) => {
     console.log("updating search term")
@@ -26,14 +27,28 @@ export default function App() {
     }
   }
 
-  console.log(searchResults(cats, "abyss"))
+  const switchAnimals = (currentAnimal) => {
+    switch(currentAnimal) {
+      case "cats":
+        // code block
+        setCurrentAnimal("dogs")
+        console.log(currentAnimal)
+        break;
+      case "dogs":
+        // code block
+        setCurrentAnimal("cats")
+        console.log(currentAnimal)
+        break;
+    }
+  }
 
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView style={styles.listContainer}>
-      <TextInput style={styles.input} placeholder="Search Breeds, i.e American" onChangeText={text => searchTermUpdate(text)}></TextInput>
+        <TextInput style={styles.input} placeholder="Search Breeds, e.g. American" onChangeText={text => searchTermUpdate(text)}></TextInput>
+        <Button title={`Switch to ${currentAnimal === 'cats' ? 'Dogs 🐶' : 'Cats 🐱'}`}onPress={() => switchAnimals(currentAnimal)}></Button>
         <FlatList style={styles.flatListContent}
-          data={searchResults(cats, searchTerm)}
+          data={searchResults(currentAnimal === 'cats' ? cats : dogs, searchTerm)}
           renderItem={({ item, index }) => <Item data={item} index={index}/>}
           keyExtractor={(item, index) => index.toString()}
         />
