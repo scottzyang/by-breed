@@ -1,8 +1,9 @@
 import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 
-export default function Item(props) {
-  const { data, index } = props;
+export default function Item({ route, navigation }) {
+  const { data, index } = route.params;
+
   const { breed } = data;
   const keys = Object.keys(data).filter((key) => key !== "breed");
 

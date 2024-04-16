@@ -7,11 +7,10 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import Item from "./Item";
 import { useState } from "react";
-import { cats, dogs, petTypes } from "./breeds";
 
-export default function PetList({ navigation }) {
+export default function PetList({ route, navigation }) {
+  const { cats, dogs } = route.params;
   const [searchTerm, setSearchTerm] = useState(null);
   const [currentAnimal, setCurrentAnimal] = useState("cats");
 
@@ -57,7 +56,18 @@ export default function PetList({ navigation }) {
             currentAnimal === "cats" ? cats : dogs,
             searchTerm
           )}
-          renderItem={({ item, index }) => <Item data={item} index={index} />}
+          renderItem={({ item, index }) => (
+            <TouchableOpacity
+              onPress={() =>
+                navigation.navigate("Item", {
+                  data: item,
+                  index: index,
+                })
+              }
+            >
+              <Text style={styles.breedText}>{item.breed}</Text>
+            </TouchableOpacity>
+          )}
           keyExtractor={(item, index) => index.toString()}
           style={styles.flatList}
         />
@@ -87,17 +97,24 @@ const styles = StyleSheet.create({
     borderColor: "#ccc",
   },
   button: {
-    backgroundColor: "#fff", // White button background
+    backgroundColor: "#fff",
     paddingVertical: 10,
     paddingHorizontal: 20,
     borderRadius: 5,
-    marginBottom: 10, // Margin between buttons
+    marginBottom: 10,
   },
   buttonText: {
-    color: "#000", // Black button text
+    color: "#000",
     fontWeight: "bold",
   },
   flatList: {
     width: "100%",
+  },
+  breedText: {
+    color: "#fff",
+    padding: 10,
+    backgroundColor: "#333",
+    borderRadius: 5,
+    marginBottom: 5,
   },
 });
