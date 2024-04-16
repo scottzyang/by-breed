@@ -4,12 +4,12 @@ import { Text, StyleSheet, View, TouchableOpacity } from "react-native";
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Welcome</Text>
+      <Text style={styles.title}>🐱 🐶</Text>
       <TouchableOpacity
         style={styles.button}
         onPress={() => navigation.navigate("PetList")}
       >
-        <Text style={styles.buttonText}>Show Me Animals</Text>
+        <Text style={styles.buttonText}>Show me the pets</Text>
       </TouchableOpacity>
     </View>
   );

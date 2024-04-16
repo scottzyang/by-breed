@@ -14,22 +14,23 @@ export default function Item(props) {
   // Calculate average rating by dividing total rating by the number of properties
   const averageRating = totalRating / keys.length;
 
-  // display ratings as ⭐️
+  // Function to generate star ratings
   const starRatings = (rating) => {
-  return '⭐️'.repeat(rating);
-};
-
+    return "⭐️".repeat(rating);
+  };
 
   return (
     <View style={styles.container}>
       <Text style={styles.label}>{`${index + 1}. ${breed}`}</Text>
       {keys.map((key) => (
         <View key={key} style={styles.propertiesContainer}>
-          <Text style={styles.subLabel}>{key}:</Text>
+          <Text style={styles.subLabel}>{`${key}:`}</Text>
           <Text style={styles.propertyValue}>{starRatings(data[key])}</Text>
         </View>
       ))}
-      <Text style={styles.averageRating}>{`Average Rating: ${averageRating.toFixed(2)} ⭐️`}</Text>
+      <Text
+        style={styles.averageRating}
+      >{`Average Rating: ${averageRating.toFixed(2)} ⭐️`}</Text>
     </View>
   );
 }
@@ -37,32 +38,36 @@ export default function Item(props) {
 const styles = StyleSheet.create({
   container: {
     padding: 10,
-    margin: 1,
-    backgroundColor: "gray",
+    marginVertical: 5,
+    backgroundColor: "#333",
+    borderRadius: 5,
   },
   label: {
-    fontSize: 28,
+    fontSize: 16,
     fontWeight: "bold",
-    fontFamily: "Arial",
-    color: "black",
-  },
-  subLabel: {
-    fontSize: 18,
-    marginLeft: 25,
+    color: "#fff",
   },
   propertiesContainer: {
-    flexDirection: "row", // Arrange children horizontally
-    alignItems: "center", // Center children vertically
-    justifyContent: "space-between", // Distribute space evenly between children
-    marginBottom: 5, // Add some space between each property
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 5,
+  },
+  subLabel: {
+    color: "#fff",
+    flexShrink: 1,
+    maxWidth: "50%",
+    flexWrap: "wrap",
   },
   propertyValue: {
-    fontSize: 18,
-    marginLeft: 10,
+    color: "#ffd700",
+    fontWeight: "bold",
+    textAlign: "right",
+    flexShrink: 1,
   },
   averageRating: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginTop: 10, // Add margin on top of the average rating
+    fontSize: 14,
+    color: "#fff",
+    marginTop: 5,
   },
 });
