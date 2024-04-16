@@ -21,7 +21,18 @@ export default function App() {
             dogs: dogs,
           }}
         />
-        <Stack.Screen name="Item" component={Item} />
+        <Stack.Screen
+          name="Item"
+          component={Item}
+          options={{
+            headerShown: true,
+            title: "Pet Details",
+            headerStyle: {
+              backgroundColor: "#000",
+            },
+            headerTintColor: "#FFCD05",
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

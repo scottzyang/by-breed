@@ -86,6 +86,7 @@ const styles = StyleSheet.create({
   listContainer: {
     width: "100%",
     paddingHorizontal: 20,
+    marginBottom: 200,
   },
   input: {
     backgroundColor: "#fff",
