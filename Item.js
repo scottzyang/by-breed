@@ -1,8 +1,9 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { Text, StyleSheet, View, ScrollView } from "react-native";
 
-export default function Item(props) {
-  const { data, index } = props;
+export default function Item({ route, navigation }) {
+  const { data, index } = route.params;
+
   const { breed } = data;
   const keys = Object.keys(data).filter((key) => key !== "breed");
 
@@ -20,54 +21,48 @@ export default function Item(props) {
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>{`${index + 1}. ${breed}`}</Text>
-      {keys.map((key) => (
-        <View key={key} style={styles.propertiesContainer}>
-          <Text style={styles.subLabel}>{`${key}:`}</Text>
-          <Text style={styles.propertyValue}>{starRatings(data[key])}</Text>
-        </View>
-      ))}
-      <Text
-        style={styles.averageRating}
-      >{`Average Rating: ${averageRating.toFixed(2)} ⭐️`}</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <Text style={styles.label}>{`${breed}`}</Text>
+      <Text style={styles.label}>{averageRating.toFixed(2)} ⭐️</Text>
+      <View style={styles.propertiesListContainer}>
+        {keys.map((key) => (
+          <View key={key} style={styles.propertiesContainer}>
+            <Text style={styles.subLabel}>{`${key}:`}</Text>
+            <Text style={styles.propertyValue}>{starRatings(data[key])}</Text>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
-    marginVertical: 5,
-    backgroundColor: "#333",
-    borderRadius: 5,
+    flex: 1,
+    backgroundColor: "#000", // Black background
+    paddingHorizontal: 20,
+    paddingVertical: 20,
   },
   label: {
-    fontSize: 16,
+    fontSize: 35,
     fontWeight: "bold",
-    color: "#fff",
+    color: "#fff", // White text color
+    marginBottom: 10, // Margin below the breed label
   },
   propertiesContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: 5,
+    paddingVertical: 5,
   },
   subLabel: {
-    color: "#fff",
-    flexShrink: 1,
-    maxWidth: "50%",
-    flexWrap: "wrap",
+    color: "#fff", // White text color
+    fontWeight: "bold",
   },
   propertyValue: {
-    color: "#ffd700",
-    fontWeight: "bold",
-    textAlign: "right",
-    flexShrink: 1,
+    color: "#ffd700", // Gold color for stars
+    textAlign: "right", // Align text to the right
   },
-  averageRating: {
-    fontSize: 14,
-    color: "#fff",
-    marginTop: 5,
+  propertiesListContainer: {
+    marginBottom: 100,
   },
 });
